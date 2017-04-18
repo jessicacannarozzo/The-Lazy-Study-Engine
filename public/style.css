@@ -1,0 +1,25 @@
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  overflow: auto;
+  margin: auto;
+}
+
+.question {
+  height: 50%;
+  width: 50%;
+  float: left;
+  padding-left: 10%;
+  padding-right: 5%;
+}
+
+.answer {
+  height: 50%;
+  width: 30%;
+  float: left;
+}
+
+body {
+  background-color: #fcfcfc;
+}
