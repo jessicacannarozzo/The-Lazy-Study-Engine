@@ -1,4 +1,4 @@
-# Lazy Study Engine
+# <span style="color:green"> Lazy Study Engine </span>
 The laziest way possible to study.
 
 ### Operating Instructions
