@@ -5,8 +5,8 @@ var bodyParser = require('body-parser')
 var file = './notes.json'
 
 var file;
-var questionNum;
-var answerNum;
+var usedValues;
+var index;
 
 app.use(express.static("./public"));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
@@ -25,37 +25,52 @@ app.get('/', function (req, res) {
 
 app.listen(3000, function () {
   console.log('Listening on port 3000...');
-  questionNum = 0;
-  answerNum = 0;
+  usedValues = []; //init
+  index = 0;
 })
 
 //get question
 app.get("/question", function(req, res) {
   var data;
 
-  console.log("question" + questionNum);
-  data = file[questionNum];
+  data = getQuestion();
+  console.log(data);
   if (data) { //if data exists
-    res.send(data[parseInt(questionNum)]);
+    res.send(data);
   } else { //reset
-    questionNum = 0;
-    data = file[questionNum]
-    res.send(data[parseInt(questionNum)]);
+    resetIndex();
+    data = getQuestion();
+    res.send(data);
   }
-  questionNum++;
 });
 
 //get answer
 app.post("/answer", function(req, res) {
-  console.log("answer" + answerNum);
-  data = file[answerNum];
+  data = getAnswer();
   if (!data) {
-    answerNum = 0;
-    data = file[answerNum];
+    console.log("Error... no answer."); // better error handling later... don't see how there would be a question without an answer yet
   }
 
-  if (req.body.answer == data[parseInt(answerNum)].answer) {
+  if (req.body.answer == data.answer) {
     res.sendStatus(200);
-    answerNum++;
   }
 });
+
+function getQuestion() {
+  while (usedValues.indexOf(index) != -1) {
+    index = parseInt(Math.random()*file.length);
+  }
+
+  //found new value
+  usedValues.push(index);
+  return file[index];
+}
+
+function getAnswer() {
+  return file[index];
+}
+
+function resetIndex() {
+  //starting the quiz over...
+  usedValues = []; //emptied
+}
