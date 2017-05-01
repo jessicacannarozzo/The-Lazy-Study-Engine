@@ -29,6 +29,16 @@ app.listen(3000, function () {
   index = 0;
 })
 
+//get possible answers to populate dropdown
+app.get("/dropdown", function(req, res) {
+  var dropdown = [];
+
+  for (var i in file[index].answers) {
+    dropdown.push(file[index].answers[i]);
+  }
+  res.send(dropdown);
+});
+
 //get question
 app.get("/question", function(req, res) {
   var data;

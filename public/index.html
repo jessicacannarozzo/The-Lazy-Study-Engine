@@ -30,8 +30,25 @@
     </div>
     <script>
       $(document).ready(function() {
+        //get question and populate dropdown
         getQuestion();
       });
+
+      function populateMenu() {
+        $.ajax({method: "GET",
+                url: "/dropdown",
+                dataType: "json",
+                success:function(data){
+                  //populate dropdown
+                  var options = $("#answers");
+                  options.clear();
+                  for (var i in data) {
+                    console.log(data[i]);
+                    options.append($("<option />").val(data).text(data));
+                  }
+                }
+        });
+      }
 
       function getQuestion() {
         console.log("Getting question...");
@@ -46,6 +63,7 @@
       					}
       				}
       	});
+        populateMenu();
       }
 
       function sendAnswer() {
