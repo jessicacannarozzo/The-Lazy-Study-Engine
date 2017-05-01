@@ -61,7 +61,7 @@ app.post("/answer", function(req, res) {
 
     if (req.body.answer == data[parseInt(answerNum)].answer) {
       res.sendStatus(200);
+      answerNum++;
     }
-    answerNum++;
   });
 });
