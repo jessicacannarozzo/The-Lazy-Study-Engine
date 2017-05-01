@@ -51,7 +51,7 @@ app.post("/answer", function(req, res) {
     console.log("Error... no answer."); // better error handling later... don't see how there would be a question without an answer yet
   }
 
-  if (req.body.answer == data.answer) {
+  if (req.body.solution == data.solution) {
     res.sendStatus(200);
   }
 });

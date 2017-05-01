@@ -51,7 +51,7 @@
       function sendAnswer() {
         var option = document.getElementById('answers');
         var value = {};
-        value.answer = option.options[option.selectedIndex].value;
+        value.solution = option.options[option.selectedIndex].value;
         console.log(value);
         $.ajax({method:"POST",
       				url:"/answer",
