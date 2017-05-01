@@ -4,6 +4,7 @@ var jsonfile = require('jsonfile');
 var bodyParser = require('body-parser')
 var file = './notes.json'
 
+var file;
 var questionNum;
 var answerNum;
 
@@ -13,6 +14,11 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+jsonfile.readFile(file, function(err, obj) { //get file
+  file = obj;
+  // if (!err) console.log("FILE: " + JSON.stringify(file));
+});
+
 app.get('/', function (req, res) {
   res.render('index', {});
 })
@@ -21,47 +27,35 @@ app.listen(3000, function () {
   console.log('Listening on port 3000...');
   questionNum = 0;
   answerNum = 0;
-
-  //test, comment later
-  // jsonfile.readFile(file, function(err, obj) {
-  //   // console.log(JSON.stringify(obj));
-  //   console.log(questionNum);
-  //   console.log(obj[questionNum]);
-  // });
 })
 
 //get question
 app.get("/question", function(req, res) {
   var data;
 
-  jsonfile.readFile(file, function(err, obj) {
-    console.log("question" + questionNum);
-    data = obj[questionNum];
-    if (data) { //if data exists
-      res.send(data[parseInt(questionNum)]);
-    } else { //reset
-      questionNum = 0;
-      data = obj[questionNum]
-      res.send(data[parseInt(questionNum)]);
-    }
-    questionNum++;
-  });
+  console.log("question" + questionNum);
+  data = file[questionNum];
+  if (data) { //if data exists
+    res.send(data[parseInt(questionNum)]);
+  } else { //reset
+    questionNum = 0;
+    data = file[questionNum]
+    res.send(data[parseInt(questionNum)]);
+  }
+  questionNum++;
 });
 
 //get answer
 app.post("/answer", function(req, res) {
-  // console.log(JSON.stringify(req.body.answer));
-  jsonfile.readFile(file, function(err, obj) {
-    console.log("answer" + answerNum);
-    data = obj[answerNum];
-    if (!data) {
-      answerNum = 0;
-      data = obj[answerNum];
-    }
+  console.log("answer" + answerNum);
+  data = file[answerNum];
+  if (!data) {
+    answerNum = 0;
+    data = file[answerNum];
+  }
 
-    if (req.body.answer == data[parseInt(answerNum)].answer) {
-      res.sendStatus(200);
-      answerNum++;
-    }
-  });
+  if (req.body.answer == data[parseInt(answerNum)].answer) {
+    res.sendStatus(200);
+    answerNum++;
+  }
 });
