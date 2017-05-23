@@ -41,10 +41,11 @@
                 success:function(data){
                   //populate dropdown
                   var options = $("#answers");
-                  options.clear();
+                  options.empty();
                   for (var i in data) {
-                    console.log(data[i]);
-                    options.append($("<option />").val(data).text(data));
+                    // console.log(data[i]);
+                    options.append($("<option>").val(data).text(data[i]));
+                    options.append($("</option>"));
                   }
                 }
         });

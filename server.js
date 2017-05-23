@@ -3,6 +3,7 @@ var app = express();
 var jsonfile = require('jsonfile');
 var bodyParser = require('body-parser')
 var file = './notes.json'
+var mongo = require('mongodb').MongoClient;
 
 var file;
 var usedValues;
@@ -13,6 +14,12 @@ app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
+
+mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
+	if(err)throw err;
+	app.listen(3000);
+	db = database; //store the connection (pool)
+});
 
 jsonfile.readFile(file, function(err, obj) { //get file
   file = obj;
