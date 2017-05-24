@@ -17,7 +17,13 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
 	if(err) throw err;
-	// app.listen(3000);
+
+  app.listen(3000, function () {
+    console.log('Listening on port 3000...');
+    usedValues = []; //init
+    index = 0;
+  })
+
 	db = database; //store the connection (pool)
 
   jsonfile.readFile(file, function(err, obj) { //get file
@@ -25,23 +31,18 @@ mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
     // if (!err) console.log("FILE: " + JSON.stringify(file));
   });
 
-  db.collection("notes").update(file,{upsert:true, w: 1}, function(err, result) { //Source: A in readme
+  db.collection("notes").update(file,{upsert:true, w: 1});
+  // , function(err, result) { //Source: A in readme
     // if (err) res.sendStatus(500); //internal server error
     // else if (!recipe.name) res.sendStatus(400); //400, data missing
     // else res.sendStatus(200); //OK, success.
-  });
+  // });
 });
 
 
 
 app.get('/', function (req, res) {
   res.render('index', {});
-})
-
-app.listen(3000, function () {
-  console.log('Listening on port 3000...');
-  usedValues = []; //init
-  index = 0;
 })
 
 //get possible answers to populate dropdown
