@@ -3,6 +3,7 @@ var app = express();
 var jsonfile = require('jsonfile');
 var bodyParser = require('body-parser')
 var file = './notes.json'
+var mongo = require('mongodb').MongoClient;
 
 var file;
 var usedValues;
@@ -14,10 +15,24 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-jsonfile.readFile(file, function(err, obj) { //get file
-  file = obj;
-  // if (!err) console.log("FILE: " + JSON.stringify(file));
+mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
+	if(err)throw err;
+	app.listen(3000);
+	db = database; //store the connection (pool)
+
+  jsonfile.readFile(file, function(err, obj) { //get file
+    file = obj;
+    // if (!err) console.log("FILE: " + JSON.stringify(file));
+  });
+
+  db.collection("notes").update(file,{upsert:true, w: 1}, function(err, result) { //Source: A in readme
+    if (err) res.sendStatus(500); //internal server error
+    else if (!recipe.name) res.sendStatus(400); //400, data missing
+    else res.sendStatus(200); //OK, success.
+  });
 });
+
+
 
 app.get('/', function (req, res) {
   res.render('index', {});
@@ -28,6 +43,16 @@ app.listen(3000, function () {
   usedValues = []; //init
   index = 0;
 })
+
+//get possible answers to populate dropdown
+app.get("/dropdown", function(req, res) {
+  var dropdown = [];
+
+  for (var i in file[index].answers) {
+    dropdown.push(file[index].answers[i]);
+  }
+  res.send(dropdown);
+});
 
 //get question
 app.get("/question", function(req, res) {
@@ -51,7 +76,7 @@ app.post("/answer", function(req, res) {
     console.log("Error... no answer."); // better error handling later... don't see how there would be a question without an answer yet
   }
 
-  if (req.body.answer == data.answer) {
+  if (req.body.solution == data.solution) {
     res.sendStatus(200);
   }
 });
