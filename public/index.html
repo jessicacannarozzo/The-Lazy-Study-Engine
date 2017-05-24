@@ -44,7 +44,7 @@
                   options.empty();
                   for (var i in data) {
                     // console.log(data[i]);
-                    options.append($("<option>").val(data).text(data[i]));
+                    options.append($("<option>").val(data[i]).text(data[i]));
                     options.append($("</option>"));
                   }
                 }
@@ -71,7 +71,7 @@
         var option = document.getElementById('answers');
         var value = {};
         value.solution = option.options[option.selectedIndex].value;
-        console.log(value);
+        console.log(value.solution);
         $.ajax({method:"POST",
       				url:"/answer",
       				data:value,
