@@ -4,6 +4,7 @@ var jsonfile = require('jsonfile');
 var bodyParser = require('body-parser')
 var file = './notes.json'
 var pg = require("pg");
+var path = require("path");
 
 
 var file;
@@ -11,8 +12,8 @@ var usedValues;
 var index;
 
 app.use(express.static("./public/homepage.html"));
-app.set('view engine', 'pug');
-app.set('views', __dirname + '/public');
+// app.set('view engine', 'pug');
+// app.set('views', __dirname + '/public');
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -32,7 +33,7 @@ jsonfile.readFile(file, function(err, obj) { //get file
 });
 
 app.get('/', function (req, res) {
-  res.send('homepage');
+  res.sendFile(path.join(__dirname+'/public/homepage.html'));
 })
 
 //get possible answers to populate dropdown

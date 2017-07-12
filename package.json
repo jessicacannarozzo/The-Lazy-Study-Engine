@@ -1,0 +1,28 @@
+{
+  "name": "lazy-study-engine",
+  "version": "1.0.0",
+  "description": "The laziest way possible to study",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jsonfile": "^2.4.0",
+    "pg": "^6.2.3",
+    "pug": "^2.0.0-rc.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm start",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessicacannarozzo/The-Lazy-Study-Engine.git"
+  },
+  "author": "Jess",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessicacannarozzo/The-Lazy-Study-Engine/issues"
+  },
+  "homepage": "https://github.com/jessicacannarozzo/The-Lazy-Study-Engine#readme"
+}
