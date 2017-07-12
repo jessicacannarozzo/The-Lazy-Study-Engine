@@ -3,16 +3,22 @@ var app = express();
 var jsonfile = require('jsonfile');
 var bodyParser = require('body-parser')
 var file = './notes.json'
+var pg = require("pg");
+
 
 var file;
 var usedValues;
 var index;
 
-app.use(express.static("./public"));
+app.use(express.static("./public/homepage.html"));
+app.set('view engine', 'pug');
+app.set('views', __dirname + '/public');
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
+
+
 
 app.listen(3000, function () {
     console.log('Listening on port 3000...');
@@ -26,7 +32,7 @@ jsonfile.readFile(file, function(err, obj) { //get file
 });
 
 app.get('/', function (req, res) {
-  res.render('index', {});
+  res.render('homepage', {});
 })
 
 //get possible answers to populate dropdown
