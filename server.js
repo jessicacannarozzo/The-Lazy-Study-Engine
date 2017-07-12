@@ -32,7 +32,7 @@ jsonfile.readFile(file, function(err, obj) { //get file
 });
 
 app.get('/', function (req, res) {
-  res.render('homepage', {});
+  res.send('homepage');
 })
 
 //get possible answers to populate dropdown
