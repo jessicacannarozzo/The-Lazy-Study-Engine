@@ -11,7 +11,7 @@ var file;
 var usedValues;
 var index;
 
-app.use(express.static("./public/homepage.html"));
+app.use(express.static("./public"));
 // app.set('view engine', 'pug');
 // app.set('views', __dirname + '/public');
 app.use(bodyParser.json());       // to support JSON-encoded bodies
