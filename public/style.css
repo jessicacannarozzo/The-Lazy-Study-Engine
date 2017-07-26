@@ -21,7 +21,13 @@
 }
 
 .homepage-buttons {
+  padding-left: 38%;
+  padding-top: 20%;
+}
 
+.btn-lg {
+  padding: 10px 25px;
+  line-height: normal;
 }
 
 body {

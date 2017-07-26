@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+  <head>
+    <title> The Lazy Study Engine </title>
+    <!-- <link rel="icon" href="http://example.com/favicon.png"> -->
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="./style.css">
+  </head>
+
+  <body>
+    <h1> <center> The Lazy Study Engine </center> </h1>
+
+    <div class="container">
+
+      <div class="question">
+        <h2> Question </h2>
+        <p class="pQuestion"> </p>
+      </div>
+
+      <div class="answer">
+        <h2> Answer </h2>
+        <select id="answers">
+          <option value="Islam"> Islam </option>
+          <option value="Hindu"> Hindu </option>
+          <option value="Buddhism"> Buddhism </option>
+          <option value="Tibetan"> Tibetan </option>
+        </select>
+        <button id="submit" onclick="sendAnswer()" class="btn btn-success">Submit</button>
+        <div style="display: none; color: #3bfc2d" id="confirmed">&#10004 Correct!</div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function() {
+        //get question and populate dropdown
+        getQuestion();
+      });
+
+      function populateMenu() {
+        $.ajax({method: "GET",
+                url: "/dropdown",
+                dataType: "json",
+                success:function(data){
+                  //populate dropdown
+                  var options = $("#answers");
+                  options.empty();
+                  for (var i in data) {
+                    // console.log(data[i]);
+                    options.append($("<option>").val(data[i]).text(data[i]));
+                    options.append($("</option>"));
+                  }
+                }
+        });
+      }
+
+      function getQuestion() {
+        console.log("Getting question...");
+        $.ajax({method: "GET",
+      				url: "/question",
+      				dataType:"json",
+      				success:function(data){
+      					if(data){
+      						var $question = $(".pQuestion");
+                  $question.html('');
+                  $question.append(data.question);
+      					}
+      				}
+      	});
+        populateMenu();
+      }
+
+      function sendAnswer() {
+        var option = document.getElementById('answers');
+        var value = {};
+        value.solution = option.options[option.selectedIndex].value;
+        console.log(value.solution);
+        $.ajax({method:"POST",
+      				url:"/answer",
+      				data:value,
+      				success:function(data) {
+      					//show/hide checkmark div
+      					document.querySelector("#confirmed").style.display="inline";
+      					setTimeout(function(){
+      						document.querySelector("#confirmed").style.display="none";
+                  getQuestion();
+      					},2000);
+      				}
+      	});
+      }
+    </script>
+
+  </body>
