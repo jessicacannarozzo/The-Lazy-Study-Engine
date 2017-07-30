@@ -11,5 +11,17 @@
 </head>
 
 <body>
+  <h1 style="text-align: center"> Creating a Quiz... </h1>
+  <div class="creation">
+    <form method="post" action="/createQuiz">
+      <div class="form-group">
+        <label for="titleField">Quiz name:</label>
+        <input type="text" class="form-control" id="titleField" name="title" required/>
+      </div>
 
+      <div class="form-group">
+        <button type="submit" class="btn btn-default">Create</button>
+      </div>
+    </form>
+  </div>
 </body>

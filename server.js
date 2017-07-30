@@ -61,6 +61,11 @@ app.get("/question", function(req, res) {
   }
 });
 
+//save new Quiz
+app.post("/createQuiz", function(req,res) {
+  console.log("Creating quiz...");
+});
+
 //get answer
 app.post("/answer", function(req, res) {
   data = getAnswer().solution;

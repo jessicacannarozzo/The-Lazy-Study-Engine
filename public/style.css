@@ -14,6 +14,11 @@
   padding-right: 5%;
 }
 
+.creation .form-group {
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
 .answer {
   height: 50%;
   width: 30%;
