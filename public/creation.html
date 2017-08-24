@@ -16,12 +16,43 @@
     <form method="post" action="/createQuiz">
       <div class="form-group">
         <label for="titleField">Quiz name:</label>
-        <input type="text" class="form-control" id="titleField" name="title" required/>
+        <input type="text" class="form-control" id="quizName" name="quizName" required/>
       </div>
 
       <div class="form-group">
         <button type="submit" class="btn btn-default">Create</button>
+            <!-- <div style="display: none; color: #3bfc2d" id="confirmed" &#10004> </div> -->
       </div>
     </form>
   </div>
 </body>
+
+<script>
+function sendQuiz(){
+console.log("Sending new recipe");
+
+//get quiz from page
+var quiz = {
+  name: $("#quizName").val()
+  // duration: $("#recipeDuration").val(),
+  // ingredients: $("#recipeIngredients").val().split("\n"),
+  // directions: $("#recipeDirections").val().split("\n"),
+  // notes: $("#recipeNotes").val()
+}
+
+//save quiz
+$.ajax({method:"POST",
+      url:"/createQuiz",
+      data:quiz,
+      success:function(data){
+        //show/hide checkmark div
+        // document.querySelector("#confirmed").style.display="inline";
+        // setTimeout(function(){
+        //   document.querySelector("#confirmed").style.display="none";
+        // },3000);
+        console.log(JSON.stringify(quiz));
+        // getRecipeList();  //refresh dropdown
+      }
+});
+}
+</script>

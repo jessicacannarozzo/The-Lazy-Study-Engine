@@ -64,6 +64,7 @@ app.get("/question", function(req, res) {
 //save new Quiz
 app.post("/createQuiz", function(req,res) {
   console.log("Creating quiz...");
+  res.redirect('./studytime.html');
 });
 
 //get answer
