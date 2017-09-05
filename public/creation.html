@@ -25,8 +25,8 @@
         <label for="quizQuestion"> Question: </label>
         <input type="text" class="form-control" id="quizQuestion" name="quizQuestion"/>
         <br />
-        <label for="quizAnswer"> Correct answer: </label>
-        <input type="text" class="form-control" id="quizAnswer" name="quizAnswer"/>
+        <label for="quizSolution"> Correct answer: </label>
+        <input type="text" class="form-control" id="quizSolution" name="quizSolution"/>
         <br />
         <label for="quizAnswer2"> Possible answers: </label>
         <input type="text" class="form-control" id="quizAnswer2" name="quizAnswer2"/>
@@ -34,7 +34,7 @@
         <input type="text" class="form-control" id="quizAnswer4" name="quizAnswer4"/>
         <div>
           <br />
-          <button class="btn btn-default" onclick="saveQuestion($('#quizQuestion').val(), $('#quizAnswer').val(), $('#quizAnswer2').val(), $('#quizAnswer3').val(), $('#quizAnswer4').val())">Next Question</button>
+          <button class="btn btn-default" onclick="saveQuestion($('#quizQuestion').val(), $('#quizSolution').val(), $('#quizAnswer2').val(), $('#quizAnswer3').val(), $('#quizAnswer4').val())">Next Question</button>
         </div>
       </div>
 
