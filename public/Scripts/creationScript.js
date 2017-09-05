@@ -25,8 +25,8 @@ function saveQuestion(quizQuestion, quizAnswer, quizAnswer2, quizAnswer3, quizAn
 
 //resets all inputs so that new question and answers can be entered
 function refreshQuestion() {
-  $('#quizQuestion').val('');
-  $('#quizAnswer*').val('');
+  $('#quizFields').find('input:text').val('');
+  // $('#quizAnswer*').val('');
 }
 
 //sends quiz back to the server to be stored as a JSON file
