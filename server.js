@@ -34,7 +34,7 @@ jsonfile.readFile(file, function(err, obj) { //get file
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname+'/public/homepage.html'));
-})
+});
 
 //get possible answers to populate dropdown
 app.get("/dropdown", function(req, res) {
@@ -51,7 +51,7 @@ app.get("/question", function(req, res) {
   var data;
 
   data = getQuestion();
-  console.log(data);
+  // console.log(data);
   if (data) { //if data exists
     res.send(data);
   } else { //reset
@@ -63,7 +63,15 @@ app.get("/question", function(req, res) {
 
 //save new Quiz
 app.post("/createQuiz", function(req,res) {
-  console.log("Creating quiz...");
+  //create .json file and save
+
+  console.log("QUIZ" + JSON.stringify(req.body));
+  var fs = require('fs');
+  fs.writeFile(JSON.stringify(req.body.quizName) + ".txt", JSON.stringify(req.body), function(err) {
+      if(err) {
+          return console.log(err);
+      }
+  });
   res.redirect('./studytime.html');
 });
 
@@ -74,7 +82,7 @@ app.post("/answer", function(req, res) {
     console.log("Error... no answer."); // better error handling later... don't see how there would be a question without an answer yet
   }
 
-  console.log(req.body.solution);
+  // console.log(req.body.solution);
 
   if (req.body.solution == data) {
     res.sendStatus(200);

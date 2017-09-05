@@ -34,13 +34,13 @@
         <input type="text" class="form-control" id="quizAnswer4" name="quizAnswer4"/>
         <div>
           <br />
-          <button class="btn btn-default" onclick="saveQuestion($('#quizQuestion').val(), $('#quizSolution').val(), $('#quizAnswer2').val(), $('#quizAnswer3').val(), $('#quizAnswer4').val())">Next Question</button>
+          <button class="btn btn-default" type="button" onclick="saveQuestion($('#quizQuestion').val(), $('#quizSolution').val(), $('#quizAnswer2').val(), $('#quizAnswer3').val(), $('#quizAnswer4').val())">Next Question</button>
         </div>
       </div>
 
       <hr/>
       <div class="form-group">
-        <button type="submit" class="btn btn-default">Create</button>
+        <button type="submit" onclick="finalizeQuiz()" class="btn btn-default">Create</button>
             <!-- <div style="display: none; color: #3bfc2d" id="confirmed" &#10004> </div> -->
       </div>
     </form>
