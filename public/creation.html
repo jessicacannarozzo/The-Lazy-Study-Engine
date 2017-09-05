@@ -22,18 +22,19 @@
       <hr />
 
       <div class="form-group">
-        <label for="questionField"> Question: </label>
+        <label for="quizQuestion"> Question: </label>
         <input type="text" class="form-control" id="quizQuestion" name="quizQuestion"/>
         <br />
-        <label for="answerField"> Correct answer: </label>
+        <label for="quizAnswer"> Correct answer: </label>
         <input type="text" class="form-control" id="quizAnswer" name="quizAnswer"/>
         <br />
-        <label for="answerField"> Possible answers: </label>
+        <label for="quizAnswer2"> Possible answers: </label>
         <input type="text" class="form-control" id="quizAnswer2" name="quizAnswer2"/>
         <input type="text" class="form-control" id="quizAnswer3" name="quizAnswer3"/>
         <input type="text" class="form-control" id="quizAnswer4" name="quizAnswer4"/>
         <div>
-          <button class="btn btn-default" onclick="saveQuestion($('#quizQuestion').val())">Next Question</button>
+          <br />
+          <button class="btn btn-default" onclick="saveQuestion($('#quizQuestion').val(), $('#quizAnswer').val(), $('#quizAnswer2').val(), $('#quizAnswer3').val(), $('#quizAnswer4').val())">Next Question</button>
         </div>
       </div>
 
