@@ -67,7 +67,7 @@ app.post("/createQuiz", function(req,res) {
 
   console.log("QUIZ" + JSON.stringify(req.body));
   var fs = require('fs');
-  fs.writeFile(JSON.stringify(req.body.quizName) + ".txt", JSON.stringify(req.body), function(err) {
+  fs.writeFile(JSON.stringify(req.body.quizName) + ".json", JSON.stringify(req.body), function(err) {
       if(err) {
           return console.log(err);
       }

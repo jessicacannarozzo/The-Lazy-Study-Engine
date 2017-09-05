@@ -5,6 +5,7 @@ var finalQuiz = new Object;
 
 function isValid(input) {
   if (input == undefined || input == "") return false;
+  else return true;
 }
 
 function addAnswer(ans) { //to avoid invalid additions
@@ -13,11 +14,10 @@ function addAnswer(ans) { //to avoid invalid additions
 
 //saves question and answers, does not finalize the quiz yet
 function saveQuestion(quizQuestion, quizAnswer, quizAnswer2, quizAnswer3, quizAnswer4) {
-  finalQuiz[index] = new Object;
-
   //at least a question, solution, and one possible answer must be valid
   if ((!isValid(quizQuestion) && !isValid(quizAnswer)) && (!isValid(quizAnswer2) || !isValid(quizAnswer3) || !isValid(quizAnswer4))) return;
 
+  finalQuiz[index] = new Object;
   //set question and solution
   finalQuiz[index].question = quizQuestion;
   finalQuiz[index].solution = quizAnswer;
